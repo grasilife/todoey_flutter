@@ -11,6 +11,15 @@ class TaskList extends StatelessWidget {
         TaskTitle(),
         TaskTitle(),
         TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
+        TaskTitle(),
       ],
     );
   }
