@@ -21,7 +21,7 @@ class TaskList extends StatelessWidget {
                 taskData.updateTask(task);
               },
               onLongPressCallback: () {
-                // taskData.deleteTask(task);
+                taskData.deleteTask(task);
               },
             );
           },
