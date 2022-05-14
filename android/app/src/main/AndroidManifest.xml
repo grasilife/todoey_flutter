@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.todoey_flutter">
    <application
         android:label="todoey_flutter"
         android:name="${applicationName}"
