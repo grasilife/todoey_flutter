@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class TaskTitle extends StatelessWidget {
   final bool isChecked;
   final String taskTitle;
-  final Function checkboxCallback;
-  final VoidCallback? onLongPressCallback;
+  final void Function(bool?)? checkboxCallback;
+  final void Function()? onLongPressCallback;
   const TaskTitle({
     required this.isChecked,
     required this.taskTitle,
-    required this.checkboxCallback,
+    this.checkboxCallback,
     this.onLongPressCallback,
     Key? key,
   }) : super(key: key);
@@ -33,10 +33,10 @@ class TaskTitle extends StatelessWidget {
 
 class TaskCheckBox extends StatelessWidget {
   final bool checkboxState;
-  final Function checkboxCallback;
+  final void Function(bool?)? checkboxCallback;
   const TaskCheckBox({
     required this.checkboxState,
-    required this.checkboxCallback,
+    this.checkboxCallback,
     Key? key,
   }) : super(key: key);
 
@@ -45,9 +45,7 @@ class TaskCheckBox extends StatelessWidget {
     return Checkbox(
       activeColor: Colors.lightBlueAccent,
       value: checkboxState,
-      onChanged: (value) {
-        checkboxCallback(value);
-      },
+      onChanged: checkboxCallback,
     );
   }
 }
