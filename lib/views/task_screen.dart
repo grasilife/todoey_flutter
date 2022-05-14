@@ -5,14 +5,9 @@ import 'package:todoey_flutter/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task_data.dart';
 
-class TaskScreen extends StatefulWidget {
+class TaskScreen extends StatelessWidget {
   const TaskScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +18,9 @@ class _TaskScreenState extends State<TaskScreen> {
           showModalBottomSheet(
             context: context,
             builder: (context) => AddTaskScreen((newTaskTitle) {
-              setState(() {
-                Provider.of<TaskData>(context)
-                    .tasks
-                    .add(Task(name: newTaskTitle));
-              });
+              Provider.of<TaskData>(context)
+                  .tasks
+                  .add(Task(name: newTaskTitle));
               Navigator.pop(context);
             }),
           );
@@ -82,9 +75,7 @@ class _TaskScreenState extends State<TaskScreen> {
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: TaskList(
-                tasks: Provider.of<TaskData>(context).tasks,
-              ),
+              child: const TaskList(),
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
