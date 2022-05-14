@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todoey_flutter/components/task_list.dart';
 import 'package:todoey_flutter/views/add_task_screen.dart';
 import 'package:todoey_flutter/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -11,11 +13,6 @@ class TaskScreen extends StatefulWidget {
 }
 
 class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +24,9 @@ class _TaskScreenState extends State<TaskScreen> {
             context: context,
             builder: (context) => AddTaskScreen((newTaskTitle) {
               setState(() {
-                tasks.add(Task(name: newTaskTitle));
+                Provider.of<TaskData>(context)
+                    .tasks
+                    .add(Task(name: newTaskTitle));
               });
               Navigator.pop(context);
             }),
@@ -49,8 +48,8 @@ class _TaskScreenState extends State<TaskScreen> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                CircleAvatar(
+              children: [
+                const CircleAvatar(
                   child: Icon(
                     Icons.list,
                     color: Colors.lightBlueAccent,
@@ -59,10 +58,10 @@ class _TaskScreenState extends State<TaskScreen> {
                   backgroundColor: Colors.white,
                   radius: 30.0,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
-                Text(
+                const Text(
                   "Todoey",
                   style: TextStyle(
                     color: Colors.white,
@@ -71,8 +70,8 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 Text(
-                  "12 Tasks",
-                  style: TextStyle(
+                  "${Provider.of<TaskData>(context).tasks.length} Tasks",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
                   ),
@@ -84,7 +83,7 @@ class _TaskScreenState extends State<TaskScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: TaskList(
-                tasks: tasks,
+                tasks: Provider.of<TaskData>(context).tasks,
               ),
               decoration: const BoxDecoration(
                   color: Colors.white,
